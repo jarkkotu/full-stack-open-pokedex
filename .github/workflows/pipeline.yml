@@ -31,8 +31,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  fly_deploy:
+  deploy:
     name: Deploy app to fly.io
+    needs: test # Ensure this job runs only after the test job succeeds
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     concurrency: deploy-group # optional: ensure only one action runs at a time
