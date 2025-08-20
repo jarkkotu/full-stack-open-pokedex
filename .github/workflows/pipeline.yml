@@ -31,6 +31,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.73.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     name: Deploy app to fly.io
     needs: test # Ensure this job runs only after the test job succeeds
