@@ -65,6 +65,8 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(join(github.event.commits.*.message), '#skip') && success() }}
     steps:
       - uses: actions/checkout@v4
+      - name: echo the webhook URL
+        run: echo "Webhook URL ${{ secrets.DISCORD_WEBHOOK }}"
       - name: Send Discord success notification
         uses: rjstone/discord-webhook-notify@v2
         with:
@@ -80,6 +82,8 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(join(github.event.commits.*.message), '#skip') && failure() }}
     steps:
       - uses: actions/checkout@v4
+      - name: echo the webhook URL
+        run: echo "Webhook URL ${{ secrets.DISCORD_WEBHOOK }}"
       - name: Send Discord failure notification
         uses: rjstone/discord-webhook-notify@v2
         with:
